@@ -1,0 +1,447 @@
+{
+	"info": {
+		"_postman_id": "42eae03e-330d-49a3-b551-5b9b54e5fa20",
+		"name": "Webmotors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Marca",
+			"item": [
+				{
+					"name": "GET Marcas - Sucesso",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Make",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Make"
+							]
+						},
+						"description": "### Response Schema\n```\n{\n    \"type\": \"array\",\n    \"items\": {\n        \"$ref\": \"#/definitions/Marcas\"\n    },\n    \"definitions\": {\n        \"Marcas\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"ID\": {\n                    \"type\": \"integer\"\n                },\n                \"Name\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"ID\",\n                \"Name\"\n            ],\n            \"title\": \"Marcas\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Modelo",
+			"item": [
+				{
+					"name": "GET Modelos - Sucesso",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gf = eval(globals.gf);",
+									"gf.getMarca();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Model?MakeID={{IdMarca}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Model"
+							],
+							"query": [
+								{
+									"key": "MakeID",
+									"value": "{{IdMarca}}",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "### Response Schema\n```\n{\n    \"type\": \"array\",\n    \"items\": {\n        \"$ref\": \"#/definitions/Modelos\"\n    },\n    \"definitions\": {\n        \"Modelos\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"MakeID\": {\n                    \"type\": \"integer\"\n                },\n                \"ID\": {\n                    \"type\": \"integer\"\n                },\n                \"Name\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"ID\",\n                \"MakeID\",\n                \"Name\"\n            ],\n            \"title\": \"Modelos\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Modelos - Status 400",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Model?MakeID=ASDF",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Model"
+							],
+							"query": [
+								{
+									"key": "MakeID",
+									"value": "ASDF"
+								}
+							]
+						},
+						"description": "### Schema Error\n```\n{\n    \"$ref\": \"#/definitions/Erros\",\n    \"definitions\": {\n        \"Erros\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"Message\": {\n                    \"type\": \"string\"\n                },\n                \"MessageDetail\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"Message\",\n                \"MessageDetail\"\n            ],\n            \"title\": \"Erros\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Versao",
+			"item": [
+				{
+					"name": "GET Versões - Sucesso",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gf = eval(globals.gf);",
+									"gf.getMarca(['getModelo'])"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Version?ModelID={{IdModelo}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Version"
+							],
+							"query": [
+								{
+									"key": "ModelID",
+									"value": "{{IdModelo}}",
+									"description": "(Required) Codigo do Modelo"
+								}
+							]
+						},
+						"description": "### Response Schema\n```\n{\n    \"type\": \"array\",\n    \"items\": {\n        \"$ref\": \"#/definitions/Versao\"\n    },\n    \"definitions\": {\n        \"Versao\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"ModelID\": {\n                    \"type\": \"integer\"\n                },\n                \"ID\": {\n                    \"type\": \"integer\"\n                },\n                \"Name\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"ID\",\n                \"ModelID\",\n                \"Name\"\n            ],\n            \"title\": \"Versao\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Versões - Status 400",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Version?ModelID=ASDF",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Version"
+							],
+							"query": [
+								{
+									"key": "ModelID",
+									"value": "ASDF",
+									"description": "(Required) Codigo do Modelo"
+								}
+							]
+						},
+						"description": "### Schema Error\n```\n{\n    \"$ref\": \"#/definitions/Erros\",\n    \"definitions\": {\n        \"Erros\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"Message\": {\n                    \"type\": \"string\"\n                },\n                \"MessageDetail\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"Message\",\n                \"MessageDetail\"\n            ],\n            \"title\": \"Erros\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Veiculos",
+			"item": [
+				{
+					"name": "GET Veiculos - Sucesso - Page 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Validando Paginacao\", function () {",
+									"    pm.expect(jsonData[0].ID).to.be.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Vehicles?Page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Vehicles"
+							],
+							"query": [
+								{
+									"key": "Page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "### Veiculo Schema\n```\n{\n    \"type\": \"array\",\n    \"items\": {\n        \"$ref\": \"#/definitions/Veiculos\"\n    },\n    \"definitions\": {\n        \"Veiculos\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"ID\": {\n                    \"type\": \"integer\"\n                },\n                \"Make\": {\n                    \"type\": \"string\"\n                },\n                \"Model\": {\n                    \"type\": \"string\"\n                },\n                \"Version\": {\n                    \"type\": \"string\"\n                },\n                \"Image\": {\n                    \"type\": \"string\",\n                    \"format\": \"uri\",\n                    \"qt-uri-protocols\": [\n                        \"http\"\n                    ],\n                    \"qt-uri-extensions\": [\n                        \".jpg\"\n                    ]\n                },\n                \"KM\": {\n                    \"type\": \"integer\"\n                },\n                \"Price\": {\n                    \"type\": \"string\"\n                },\n                \"YearModel\": {\n                    \"type\": \"integer\"\n                },\n                \"YearFab\": {\n                    \"type\": \"integer\"\n                },\n                \"Color\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"Color\",\n                \"ID\",\n                \"Image\",\n                \"KM\",\n                \"Make\",\n                \"Model\",\n                \"Price\",\n                \"Version\",\n                \"YearFab\",\n                \"YearModel\"\n            ],\n            \"title\": \"Veiculos\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Veiculos - Sucesso - Page 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Validando Paginacao\", function () {",
+									"    pm.expect(jsonData[0].ID).to.be.eq(11);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Vehicles?Page=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Vehicles"
+							],
+							"query": [
+								{
+									"key": "Page",
+									"value": "2"
+								}
+							]
+						},
+						"description": "### Veiculo Schema\n```\n{\n    \"type\": \"array\",\n    \"items\": {\n        \"$ref\": \"#/definitions/Veiculos\"\n    },\n    \"definitions\": {\n        \"Veiculos\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"ID\": {\n                    \"type\": \"integer\"\n                },\n                \"Make\": {\n                    \"type\": \"string\"\n                },\n                \"Model\": {\n                    \"type\": \"string\"\n                },\n                \"Version\": {\n                    \"type\": \"string\"\n                },\n                \"Image\": {\n                    \"type\": \"string\",\n                    \"format\": \"uri\",\n                    \"qt-uri-protocols\": [\n                        \"http\"\n                    ],\n                    \"qt-uri-extensions\": [\n                        \".jpg\"\n                    ]\n                },\n                \"KM\": {\n                    \"type\": \"integer\"\n                },\n                \"Price\": {\n                    \"type\": \"string\"\n                },\n                \"YearModel\": {\n                    \"type\": \"integer\"\n                },\n                \"YearFab\": {\n                    \"type\": \"integer\"\n                },\n                \"Color\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"Color\",\n                \"ID\",\n                \"Image\",\n                \"KM\",\n                \"Make\",\n                \"Model\",\n                \"Price\",\n                \"Version\",\n                \"YearFab\",\n                \"YearModel\"\n            ],\n            \"title\": \"Veiculos\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Veiculos - Status 400",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/OnlineChallenge/Vehicles?Page",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"OnlineChallenge",
+								"Vehicles"
+							],
+							"query": [
+								{
+									"key": "Page",
+									"value": null,
+									"description": "(Required) Codigo do Modelo"
+								}
+							]
+						},
+						"description": "### Schema Error\n```\n{\n    \"$ref\": \"#/definitions/Erros\",\n    \"definitions\": {\n        \"Erros\": {\n            \"type\": \"object\",\n            \"additionalProperties\": false,\n            \"properties\": {\n                \"Message\": {\n                    \"type\": \"string\"\n                },\n                \"MessageDetail\": {\n                    \"type\": \"string\"\n                }\n            },\n            \"required\": [\n                \"Message\",\n                \"MessageDetail\"\n            ],\n            \"title\": \"Erros\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.globals.set('gf', function loadGlobalFunctions() {",
+					"    const gf = {};",
+					"",
+					"    //funcao para limpar variaveis globais",
+					"    gf.unsetGlobals = () => {",
+					"        (pm.globals.values.filter(v => v.key !== 'gf')).map(vk => pm.globals.unset(vk))",
+					"      }",
+					"",
+					"    gf.chainRequests = (argList) => {",
+					"      wrapper = eval(globals.gf);",
+					"      if (typeof (argList) === 'function') { argList() }",
+					"      if (argList != null && argList.length > 0 && typeof (argList) === 'object') {",
+					"        let arg = argList.shift();",
+					"        wrapper[arg](argList)",
+					"      }",
+					"    }",
+					"",
+					"    gf.getModelo = (argList) => {",
+					"        const baseUrl = pm.collectionVariables.get(\"baseUrl\");",
+					"        let IdMarca = pm.globals.get('IdMarca')  ",
+					"",
+					"        pm.sendRequest({",
+					"            url: baseUrl+\"/api/OnlineChallenge/Model?MakeID=\" + IdMarca,",
+					"            method: \"GET\",",
+					"            header: {'Content-Type': 'application/json'},",
+					"        }, (err, response) => {",
+					"            if (err) throw new Error(err);",
+					"",
+					"            jsonData = response.json();",
+					"            idModelo = jsonData.find(marca => marca.Name == 'City').ID;",
+					"            pm.globals.set('IdModelo', idModelo)",
+					"            gf.chainRequests(argList)",
+					"        });",
+					"    }",
+					"",
+					"    gf.getMarca = (argList) => {",
+					"        const baseUrl = pm.collectionVariables.get(\"baseUrl\");",
+					"        pm.sendRequest({",
+					"              url: baseUrl+\"/api/OnlineChallenge/Make\",",
+					"              method: \"GET\",",
+					"              header: {'Content-Type': 'application/json'},",
+					"          },(err, response) => {",
+					"              if (err) throw new Error(err);",
+					"  ",
+					"              jsonData = response.json();",
+					"",
+					"              idMarca  = jsonData.find(marca => marca.Name == 'Honda').ID;",
+					"              pm.globals.set('IdMarca', idMarca)",
+					"              gf.chainRequests(argList)",
+					"        });",
+					"    }",
+					"  ",
+					"    gf.unsetGlobals();",
+					"  ",
+					"    return gf;",
+					"  } + '; loadGlobalFunctions();');"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Não deve retornar server error\", () => {",
+					"  pm.response.to.not.be.serverError",
+					"});",
+					"",
+					"if (pm.request.description && pm.request.description.content.match(/Schema/)) {",
+					"    pm.test(\"Validando Contrato\", () => {",
+					"        let schema = JSON.parse(pm.request.description.content.match(/.*/gm).join(\"\").match(/\\`\\`\\`(.*)\\`\\`\\`/)[1])",
+					"        pm.response.to.have.jsonSchema(schema);",
+					"    })",
+					"}",
+					"",
+					"if (pm.info.requestName.match(/Sucesso/)) {",
+					"   pm.test(\"Deve retornar status de sucesso\", () => {",
+					"        pm.response.to.be.success;",
+					"        pm.response.to.be.withBody;",
+					"        pm.response.to.be.json; ",
+					"   });",
+					"}",
+					"",
+					"if (pm.info.requestName.match(/400/)) {",
+					"   pm.test(\"Deve retornar status 400\", () => {",
+					"        var jsonData = pm.response.json();",
+					"        pm.response.to.have.status(400)",
+					"        pm.expect(jsonData.Message).to.eql(\"The request is invalid.\");",
+					"   });",
+					"}",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://desafioonline.webmotors.com.br"
+		}
+	]
+}

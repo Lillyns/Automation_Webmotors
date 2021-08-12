@@ -1,0 +1,7 @@
+marca:          "//a[@class='CardMake' and contains(@href,'<%= @btn %>')]"
+modelo:         "//div[@class='Filters__line Filters__line--gray Filters__line--icon Filters__line--icon--right']"
+versao:         "//div[@class='Filters__make-block']/div[2]/div[3]"
+navbar:         "//div[@class='Search-result Search-result--container-left']"
+lista_carros:   "//div[@class='sc-hMFtBS cVTeoI']"
+itens_modelos:  "//a[@class='Filters__line Filters__line__result' and contains(@href,'<%= @btn %>')]"
+itens_versoes:  "//div[@class='Filters__line Filters__line__result']"

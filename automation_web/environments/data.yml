@@ -1,0 +1,2 @@
+base_url:     "https://www.webmotors.com.br"
+rota_estoque: "/carros/estoque?idcmpint=t1:c17:m07:webmotors:busca::verofertas"

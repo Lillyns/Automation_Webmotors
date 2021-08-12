@@ -1,0 +1,7 @@
+default: -p selenium_novo_tela -p pretty --publish  
+headless: -p selenium_novo -p pretty --publish  
+
+selenium_novo: BROWSER=selenium_novo
+selenium_novo_tela: BROWSER=selenium_novo_tela
+pretty: --format pretty
+progress: --format progress
